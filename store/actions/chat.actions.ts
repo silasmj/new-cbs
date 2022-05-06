@@ -20,6 +20,9 @@ export const fetchChatrooms = () => {
             }
         });
 
+        console.log('Silas');
+        
+
         // console.log(await response.json());
 
         if (!response.ok) {
