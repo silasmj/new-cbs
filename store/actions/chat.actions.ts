@@ -20,7 +20,7 @@ export const fetchChatrooms = () => {
             }
         });
 
-        console.log('Silas');
+        console.log('Boliver');
         
 
         // console.log(await response.json());
