@@ -27,6 +27,8 @@ export default function Screen1() {
     }, [])
 
     const handleAddChatroom = () => {
+        console.log('hej');
+        
         const chatroom: Chatroom = new Chatroom(title, Status.UNREAD, '', new Date());
         dispatch(addChatroom(chatroom));
     }
@@ -51,7 +53,7 @@ export default function Screen1() {
                 value={title}
                 placeholder="Chatroom name"
             />
-            <Button title="Create chatroom" onPress={handleAddChatroom} />
+            <Button title="Create chatroom 2" onPress={handleAddChatroom} />
         </View>
     );
 }
