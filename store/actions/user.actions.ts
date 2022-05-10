@@ -2,10 +2,10 @@ import * as SecureStore from 'expo-secure-store';
 import { FirebaseSignupSuccess } from "../../entities/FirebaseSignupSuccess";
 import { User } from '../../entities/User';
 
-
 export const SIGNUP = 'SIGNUP';
 export const REHYDRATE_USER = 'REHYDRATE_USER';
 export const LOGOUT = 'LOGOUT';
+export const UPDATEDATA = 'UPDATEDATA';
 
 export const rehydrateUser = (user: User, idToken: string) => {
     return { type: REHYDRATE_USER, payload: { user, idToken } }
@@ -17,6 +17,19 @@ export const logout = () => {
 
     return { type: LOGOUT }
 }
+export const updateUser = (email: string, studyprogramme: string, name: string) => {
+    return async (dispatch: any, getState: any) => {
+        const token = getState().user.idToken;
+        console.log(token)
+        const response = await fetch(
+            'https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app/userProfile.json?auth=' + token, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        }
+    }
 
 export const signup = (email: string, password: string) => {
     return async (dispatch: any, getState: any) => {
