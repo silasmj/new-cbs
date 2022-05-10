@@ -20,8 +20,6 @@ export const fetchChatrooms = () => {
             }
         });
 
-        console.log('Boliver');
-        
 
         // console.log(await response.json());
 
