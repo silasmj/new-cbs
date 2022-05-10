@@ -22,13 +22,42 @@ export const updateUser = (email: string, studyprogramme: string, name: string) 
         const token = getState().user.idToken;
         console.log(token)
         const response = await fetch(
-            'https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app/userProfile.json?auth=' + token, {
-                method: 'POST',
+            'https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app//userprofile.json?auth=' + token,  {
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({ //javascript to json
+                    //key value pairs of data you want to send to server
+                    // ...
+                    email: email,
+                    name: name,
+                    studyprogramme: studyprogramme,
+                    returnSecureToken: true
             })
+        });
+        if (!response.ok) {
+            //There was a problem..
+            console.log(await response.json());
+            
+            //dispatch({type: SIGNUP_FAILED, payload: 'something'})
+        } else {
+            const data = await response.json(); // json to javascript
+
+            console.log(data,'khkh');
+            dispatch({ type: UPDATEDATA, payload: { name, studyprogramme, email} })
+
+            /*const data: FirebaseSignupSuccess = await response.json(); // json to javascript
+            console.log("data from server", data);
+
+            const user = new User(data.email, '', '');
+
+            //await SecureStore.setItemAsync('idToken', data.idToken);
+            //await SecureStore.setItemAsync('user', JSON.stringify(user)); // convert user js-obj. to json
+
+            dispatch({ type: SIGNUP, payload: { user, idToken: data.idToken } })*/
         }
+    };
     }
 
 export const signup = (email: string, password: string) => {
@@ -68,6 +97,27 @@ export const signup = (email: string, password: string) => {
             await SecureStore.setItemAsync('user', JSON.stringify(user)); // convert user js-obj. to json
 
             dispatch({ type: SIGNUP, payload: { user, idToken: data.idToken } })
+                
         }
     };
+
 };
+
+export const createUser = (user: User) => {
+    return async(dispatch: any, getState: any) => {
+        const token = getState().user.idToken;
+        console.log(token)
+        const response = await fetch(
+            'https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app//userprofile.json?auth=' + token,  {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ //javascript to json
+                    //key value pairs of data you want to send to server
+                    // ...
+                        user
+            })
+        });
+    }
+}
