@@ -19,8 +19,6 @@ export const fetchChatrooms = () => {
                 'Content-Type': 'application/json'
             }
         });
-
-        console.log('Boliver');
         
 
         // console.log(await response.json());

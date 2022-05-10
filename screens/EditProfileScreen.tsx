@@ -8,13 +8,16 @@ import { User } from '../entities/User';
 export default function EditProfileScreen() {
     const user: User = useSelector((state: RootState) => state.user.loggedInUser);
     const [textEmail, setTextEmail] = useState(user.email)
+    const [textName, setTextName] = useState(user.displayname)
+    const [textStudyprogramme, setTextStudyprogramme] = useState(user.studyprogramme)
+
     // console.log(user.email);
 
     const onSave = () => {
-        if (textEmail !== ''  /* && other inputs are not empty */) {
-            // save the data to the server
+        if (textEmail !== '' && textName !== '' && textStudyprogramme !== '' ) {
+            
         } else {
-            //Show error message
+        alert("inputfield can't be empty")
         }
     }
 
@@ -26,11 +29,19 @@ export default function EditProfileScreen() {
                 setText={setTextEmail}
                 error="Email cannot be empty"
             />
-            {/* <Input title="Study programme"
-                inputValue=""
-                error="Study programme cannot be empty" /> */}
+            <Input title="What's your name?"
+                inputValue={textName}
+                setText={setTextName}
+                error="Name can't be empty"
+            />
+            <Input title="Study programme"
+                inputValue={textStudyprogramme}
+                setText={setTextStudyprogramme}
 
-            <Button title="Save" onPress={() => console.log("hi")} />
+                error="Study programme cannot be empty" 
+            /> 
+
+            <Button title="Save" onPress={() => onSave()} />
         </View>
     );
 }
