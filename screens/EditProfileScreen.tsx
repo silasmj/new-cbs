@@ -9,10 +9,14 @@ import { useDispatch } from 'react-redux';
 
 export default function EditProfileScreen() {
     const user: User = useSelector((state: RootState) => state.user.loggedInUser);
+    
     const [textEmail, setTextEmail] = useState(user.email)
     const [textName, setTextName] = useState(user.displayname)
     const [textStudyprogramme, setTextStudyprogramme] = useState(user.studyprogramme)
     const dispatch = useDispatch();
+    console.log('asdasdasdasdasd', user.displayname);
+    
+    
     // console.log(user.email);
     
     const onSave = (textEmail: string, textName: string, textStudyprogramme: string ) => {
@@ -39,7 +43,6 @@ export default function EditProfileScreen() {
             <Input title="Study programme"
                 inputValue={textStudyprogramme}
                 setText={setTextStudyprogramme}
-
                 error="Study programme cannot be empty" 
             /> 
 
