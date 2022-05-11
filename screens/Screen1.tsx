@@ -53,7 +53,7 @@ export default function Screen1() {
                 value={title}
                 placeholder="Chatroom name"
             />
-            <Button title="Create chatroom 2" onPress={handleAddChatroom} />
+            <Button title="Create chatroom" onPress={handleAddChatroom} />
         </View>
     );
 }

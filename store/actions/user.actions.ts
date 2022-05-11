@@ -5,7 +5,7 @@ import { User } from '../../entities/User';
 export const SIGNUP = 'SIGNUP';
 export const REHYDRATE_USER = 'REHYDRATE_USER';
 export const LOGOUT = 'LOGOUT';
-export const UPDATEDATA = 'UPDATEDATA';
+export const UPDATEUSER = 'UPDATEUSER';
 export const NEWUSER = 'NEWUSER';
 export const rehydrateUser = (user: User, idToken: string) => {
     return { type: REHYDRATE_USER, payload: { user, idToken } }
@@ -33,8 +33,11 @@ export const updateUser = (email: string, studyprogramme: string, name: string) 
                 body: JSON.stringify({ //javascript to json
                     //key value pairs of data you want to send to server
                     // ...
-                    user
-            })
+                    email: email,
+                    displayname: name,
+                    studyprogramme: studyprogramme
+
+                })
         });
         if (!response.ok) {
             //There was a problem..
@@ -45,7 +48,8 @@ export const updateUser = (email: string, studyprogramme: string, name: string) 
             const data = await response.json(); // json to javascript
 
             console.log(data);
-            dispatch({ type: UPDATEDATA, payload: { name, studyprogramme, email} })
+            const updateUser = new User(email, name, studyprogramme)
+            dispatch({ type: UPDATEUSER, payload: { updateUser} })
 
             /*const data: FirebaseSignupSuccess = await response.json(); // json to javascript
             console.log("data from server", data);
@@ -127,7 +131,7 @@ export const createUser = (user: User) => {
         const data = await response.json()
         const newUser = new User(user.email, user.displayname, user.studyprogramme, data.name);
 
-        console.log(data.name)
+        console.log(newUser)
         dispatch({type: NEWUSER, payload: {newUser}})
 
     } 
