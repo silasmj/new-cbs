@@ -4,18 +4,20 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../App';
 import Input from '../components/Input';
 import { User } from '../entities/User';
+import { updateUser } from '../store/actions/user.actions';
+import { useDispatch } from 'react-redux';
 
 export default function EditProfileScreen() {
     const user: User = useSelector((state: RootState) => state.user.loggedInUser);
     const [textEmail, setTextEmail] = useState(user.email)
     const [textName, setTextName] = useState(user.displayname)
     const [textStudyprogramme, setTextStudyprogramme] = useState(user.studyprogramme)
-
+    const dispatch = useDispatch();
     // console.log(user.email);
-
-    const onSave = () => {
+    
+    const onSave = (textEmail: string, textName: string, textStudyprogramme: string ) => {
         if (textEmail !== '' && textName !== '' && textStudyprogramme !== '' ) {
-            
+           dispatch(updateUser(textEmail, textStudyprogramme, textName));     
         } else {
         alert("inputfield can't be empty")
         }
@@ -41,7 +43,7 @@ export default function EditProfileScreen() {
                 error="Study programme cannot be empty" 
             /> 
 
-            <Button title="Save" onPress={() => onSave()} />
+            <Button title="Save" onPress={() => onSave(textEmail, textName, textStudyprogramme)} />
         </View>
     );
 }
