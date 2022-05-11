@@ -126,7 +126,7 @@ export const createUser = (user: User) => {
         const newUser = new User(user.email, user.displayname, user.studyprogramme, data.name);
 
         console.log(data.name)
-        dispatch({type: NEWUSER, payload: {user, userId: data.name}})
+        dispatch({type: NEWUSER, payload: {newUser}})
 
     } 
 }
