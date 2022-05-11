@@ -20,10 +20,12 @@ export const logout = () => {
 export const updateUser = (email: string, studyprogramme: string, name: string) => {
     return async (dispatch: any, getState: any) => {
         const token = getState().user.idToken;
+        const userId = getState().user.loggedInUser.localid;
         const user = new User(email, name, studyprogramme)
-        console.log(token)
+        console.log('sdsdsdsdsd', userId);
+        
         const response = await fetch(
-            'https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app//userprofile.json?auth=' + token,  {
+            'https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app//userprofile/' + userId + '.json?auth=' + token,  {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
