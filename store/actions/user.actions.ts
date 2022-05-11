@@ -6,7 +6,7 @@ export const SIGNUP = 'SIGNUP';
 export const REHYDRATE_USER = 'REHYDRATE_USER';
 export const LOGOUT = 'LOGOUT';
 export const UPDATEDATA = 'UPDATEDATA';
-
+export const NEWUSER = 'NEWUSER';
 export const rehydrateUser = (user: User, idToken: string) => {
     return { type: REHYDRATE_USER, payload: { user, idToken } }
 }
@@ -20,6 +20,7 @@ export const logout = () => {
 export const updateUser = (email: string, studyprogramme: string, name: string) => {
     return async (dispatch: any, getState: any) => {
         const token = getState().user.idToken;
+        const user = new User(email, name, studyprogramme)
         console.log(token)
         const response = await fetch(
             'https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app//userprofile.json?auth=' + token,  {
@@ -30,10 +31,7 @@ export const updateUser = (email: string, studyprogramme: string, name: string) 
                 body: JSON.stringify({ //javascript to json
                     //key value pairs of data you want to send to server
                     // ...
-                    email: email,
-                    name: name,
-                    studyprogramme: studyprogramme,
-                    returnSecureToken: true
+                    user
             })
         });
         if (!response.ok) {
@@ -44,7 +42,7 @@ export const updateUser = (email: string, studyprogramme: string, name: string) 
         } else {
             const data = await response.json(); // json to javascript
 
-            console.log(data,'khkh');
+            console.log(data);
             dispatch({ type: UPDATEDATA, payload: { name, studyprogramme, email} })
 
             /*const data: FirebaseSignupSuccess = await response.json(); // json to javascript
@@ -74,7 +72,9 @@ export const signup = (email: string, password: string) => {
                 // ...
                 email: email,
                 password: password,
-                returnSecureToken: true
+                returnSecureToken: true,
+
+                
             })
         });
 
@@ -97,7 +97,7 @@ export const signup = (email: string, password: string) => {
             await SecureStore.setItemAsync('user', JSON.stringify(user)); // convert user js-obj. to json
 
             dispatch({ type: SIGNUP, payload: { user, idToken: data.idToken } })
-                
+                dispatch(createUser(user))
         }
     };
 
@@ -106,18 +106,27 @@ export const signup = (email: string, password: string) => {
 export const createUser = (user: User) => {
     return async(dispatch: any, getState: any) => {
         const token = getState().user.idToken;
-        console.log(token)
+        //console.log(token)
         const response = await fetch(
             'https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app//userprofile.json?auth=' + token,  {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ //javascript to json
+                body: JSON.stringify( //javascript to json
                     //key value pairs of data you want to send to server
                     // ...
                         user
-            })
+        
+            )
         });
-    }
+        console.log('HELLOOO')
+        //console.log(await response.json())
+        const data = await response.json()
+        const newUser = new User(user.email, user.displayname, user.studyprogramme, data.name);
+
+        console.log(data.name)
+        dispatch({type: NEWUSER, payload: {user, userId: data.name}})
+
+    } 
 }
