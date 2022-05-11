@@ -23,8 +23,6 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
             return { ...state, loggedInUser: action.payload.user, idToken: action.payload.idToken }
         case NEWUSER: 
             return { ...state, user: action.payload.user }
-        //case UPDATEUSER:
-          //  return {...state, user: }
         default:
             return state;
     }
