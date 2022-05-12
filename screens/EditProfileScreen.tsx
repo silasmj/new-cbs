@@ -6,6 +6,11 @@ import Input from '../components/Input';
 import { User } from '../entities/User';
 import { updateUser } from '../store/actions/user.actions';
 import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackParamList } from '../typings/navigations';
+
+type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "EditProfile">;
 
 export default function EditProfileScreen() {
     const user: User = useSelector((state: RootState) => state.user.loggedInUser);
@@ -14,14 +19,23 @@ export default function EditProfileScreen() {
     const [textName, setTextName] = useState(user.displayname)
     const [textStudyprogramme, setTextStudyprogramme] = useState(user.studyprogramme)
     const dispatch = useDispatch();
-    console.log('asdasdasdasdasd', user.displayname);
-    
+    const navigation = useNavigation<ScreenNavigationType>()
+    //console.log('asdasdasdasdasd', user.displayname);
+
+    const returnToProfile = () => {
+        navigation.navigate("Profile")
+    }
+
+    const funcWrapper = (textEmail: string, textName: string, textStudyprogramme: string ) => {
+        onSave(textEmail, textName, textStudyprogramme)
+        returnToProfile()
+    }
     
     // console.log(user.email);
     
     const onSave = (textEmail: string, textName: string, textStudyprogramme: string ) => {
         if (textEmail !== '' && textName !== '' && textStudyprogramme !== '' ) {
-           dispatch(updateUser(textEmail, textStudyprogramme, textName));     
+           dispatch(updateUser(textEmail, textStudyprogramme, textName));
         } else {
         alert("inputfield can't be empty")
         }
@@ -46,7 +60,7 @@ export default function EditProfileScreen() {
                 error="Study programme cannot be empty" 
             /> 
 
-            <Button title="Save" onPress={() => onSave(textEmail, textName, textStudyprogramme)} />
+            <Button title="Save" onPress={() => funcWrapper(textEmail, textName, textStudyprogramme)} />
         </View>
     );
 }

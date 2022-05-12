@@ -1,6 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
 import { FirebaseSignupSuccess } from "../../entities/FirebaseSignupSuccess";
 import { User } from '../../entities/User';
+import EditProfileScreen from '../../screens/EditProfileScreen'
 
 export const SIGNUP = 'SIGNUP';
 export const REHYDRATE_USER = 'REHYDRATE_USER';
@@ -48,7 +49,7 @@ export const updateUser = (email: string, studyprogramme: string, name: string) 
             const data = await response.json(); // json to javascript
 
             console.log(data);
-            const updateUser = new User(email, name, studyprogramme)
+            const updateUser = new User(email, name, studyprogramme, userId)
             dispatch({ type: UPDATEUSER, payload: { updateUser} })
 
             /*const data: FirebaseSignupSuccess = await response.json(); // json to javascript
