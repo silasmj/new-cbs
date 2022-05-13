@@ -1,5 +1,4 @@
 import { Chatroom } from "../../entities/Chatroom";
-
 export const TOGGLE_HAPPY = 'TOGGLE_HAPPY';
 export const ADD_CHATROOM = 'ADD_CHATROOM';
 export const FETCH_CHATROOMS = 'FETCH_CHATROOMS';

@@ -1,11 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Chatroom, Status } from '../entities/Chatroom';
 import { addChatroom, fetchChatrooms, toggleHappy } from '../store/actions/chat.actions';
 import { StackParamList } from "../typings/navigations";
+import ChatRoom from "./ChatRoomScreen";
+
 
 type ScreenNavigationType = NativeStackNavigationProp<
     StackParamList,
@@ -33,8 +35,15 @@ export default function Screen1() {
         dispatch(addChatroom(chatroom));
     }
     const renderChatroom = ({ item }: { item: any }) => (
-        <Text>{item.title}</Text>
+        
+        <TouchableOpacity style={styles.ChatButton}>
+            <Text onPress={() => navigation.navigate("ChatRoomScreen")}>{item.title}</Text>
+        </TouchableOpacity>
+
     );
+   /* const redirect = () => {
+        navigation.navigate('ChatRoom');
+    }*/
 
     return (
         <View style={styles.container}>
@@ -54,6 +63,7 @@ export default function Screen1() {
                 placeholder="Chatroom name"
             />
             <Button title="Create chatroom" onPress={handleAddChatroom} />
+
         </View>
     );
 }
@@ -65,4 +75,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    ChatButton: {
+        justifyContent: 'space-between',
+        padding: 8,
+        borderWidth: 1,
+        borderColor: "black",
+        backgroundColor: "pink"
+
+    }
+   
 })
