@@ -27,6 +27,10 @@ export default function EditProfileScreen() {
     }
 
     const funcWrapper = (textEmail: string, textName: string, textStudyprogramme: string ) => {
+        console.log(textName);
+        console.log(textStudyprogramme);
+        
+        
         onSave(textEmail, textName, textStudyprogramme)
         returnToProfile()
     }
