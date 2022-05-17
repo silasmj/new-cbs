@@ -6,4 +6,5 @@ export type StackParamList = {
     Profile: undefined;
     EditProfile: undefined;
     ChatRoomScreen: undefined;
+    ReactQueryScreen: undefined;
 }

@@ -14,6 +14,7 @@ import Screen1 from './../screens/Screen1';
 import Screen2 from './../screens/Screen2';
 import Screen3 from './../screens/Screen3';
 import { StackParamList } from "./../typings/navigations";
+import ReactQueryScreen from "./../screens/ReactQueryScreen";
 
 const Stack = createNativeStackNavigator<StackParamList>();
 const Tab = createBottomTabNavigator();
@@ -38,6 +39,14 @@ function ProfileStackNavigator() {
     )
 }
 
+function ReactQueryNavigator(){
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="ReactQueryScreen" component={ReactQueryScreen}/>
+        </Stack.Navigator>
+    )
+}
+
 
 
 export default function Navigation() {
@@ -56,6 +65,7 @@ export default function Navigation() {
                     {/* <Tab.Screen name="Discover" component={DiscoverScreen} /> */}
                     <Tab.Screen name="Chat" component={ChatStackNavigator} />
                     <Tab.Screen name="Menu" component={ProfileStackNavigator} />
+                    <Tab.Screen name="ReactQuery" component={ReactQueryNavigator}/>
                 </Tab.Navigator>
             ) : (
                 // show a stack navigator with only signup and login screens.
