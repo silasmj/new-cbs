@@ -28,9 +28,7 @@ export default function Screen1() {
         dispatch(fetchChatrooms())
     }, [])
 
-    const handleAddChatroom = () => {
-        console.log('hej');
-        
+    const handleAddChatroom = () => {        
         const chatroom: Chatroom = new Chatroom(title, Status.UNREAD, '', new Date());
         dispatch(addChatroom(chatroom));
     }

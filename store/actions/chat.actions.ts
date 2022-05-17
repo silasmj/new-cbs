@@ -33,7 +33,6 @@ export const fetchChatrooms = () => {
                 chatrooms.push(new Chatroom(obj.title, obj.status, obj.message, new Date(obj.timestamp), key))
             }
 
-            console.log("chatrooms", chatrooms);
 
             // console.log("data from server", data);
             //chatroom.id = data.name;
@@ -46,11 +45,8 @@ export const fetchChatrooms = () => {
 export const addChatroom = (chatroom: Chatroom) => {
     return async (dispatch: any, getState: any) => {
         const token = getState().user.idToken;
-        console.log('hej');
         
-        //console.log(token);
-        console.log('hej');
-        
+        //console.log(token);        
 
         //delete chatroom.id // for an update, this would remove the id attribute (and value) from the chatroom
         const response = await fetch(
@@ -78,7 +74,6 @@ export const addChatroom = (chatroom: Chatroom) => {
             //     console.log(data[key].name)​
             // }
 
-            console.log("data from server", data);
             chatroom.id = data.name;
 
             dispatch({ type: ADD_CHATROOM, payload: chatroom })

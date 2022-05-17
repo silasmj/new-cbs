@@ -23,7 +23,6 @@ export const updateUser = (email: string, studyprogramme: string, name: string) 
         const token = getState().user.idToken;
         const userId = getState().user.loggedInUser.localid;
         const user = new User(email, name, studyprogramme)
-        console.log('sdsdsdsdsd', userId);
         
         const response = await fetch(
             'https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app//userprofile/' + userId + '.json?auth=' + token,  {
@@ -48,7 +47,6 @@ export const updateUser = (email: string, studyprogramme: string, name: string) 
         } else {
             const data = await response.json(); // json to javascript
 
-            console.log(data);
             const updateUser = new User(email, name, studyprogramme, userId)
             dispatch({ type: UPDATEUSER, payload: { updateUser} })
 
@@ -96,7 +94,6 @@ export const signup = (email: string, password: string) => {
             console.log('Everythings good');
             
             const data: FirebaseSignupSuccess = await response.json(); // json to javascript
-            console.log("data from server", data);
 
             const user = new User(data.email, '', '');
 
@@ -127,12 +124,10 @@ export const createUser = (user: User) => {
         
             )
         });
-        console.log('HELLOOO')
         //console.log(await response.json())
         const data = await response.json()
         const newUser = new User(user.email, user.displayname, user.studyprogramme, data.name);
 
-        console.log(newUser)
         dispatch({type: NEWUSER, payload: {newUser}})
 
     } 
