@@ -48,14 +48,9 @@ export const updateUser = (email: string, studyprogramme: string, name: string) 
         } else {
             const data = await response.json(); // json to javascript
 
-            console.log('data from server: ', data);
+            console.log(data);
             const updateUser = new User(email, name, studyprogramme, userId)
-            console.log('updated user:', updateUser);
-            
-            dispatch({ type: UPDATEUSER, payload: { updateUser, idToken: data.idToken} })
-            
-            
-            
+            dispatch({ type: UPDATEUSER, payload: { updateUser} })
 
             /*const data: FirebaseSignupSuccess = await response.json(); // json to javascript
             console.log("data from server", data);
@@ -138,7 +133,7 @@ export const createUser = (user: User) => {
         const newUser = new User(user.email, user.displayname, user.studyprogramme, data.name);
 
         console.log(newUser)
-        dispatch({type: NEWUSER, payload: {newUser, idToken: data.idToken}})
+        dispatch({type: NEWUSER, payload: {newUser}})
 
     } 
 }

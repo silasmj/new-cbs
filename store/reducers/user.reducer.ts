@@ -21,10 +21,10 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
             // const user = new User(action.payload.email, '', '');
             //state.loggedInUser = user; // MUTATION!!!!
             return { ...state, loggedInUser: action.payload.user, idToken: action.payload.idToken }
-        case NEWUSER:             
-            return { ...state, loggedInUser: action.payload.newUser, idToken: action.payload.idToken }
+        case NEWUSER:
+            return { ...state, loggedInUser: action.payload.newUser }
         case UPDATEUSER:
-            return {...state, loggedInUser: action.payload.updateUser, idToken: action.payload.idToken}
+            return {...state, loggedInUser: action.payload.updateUser}
         default:
             return state;
     }
