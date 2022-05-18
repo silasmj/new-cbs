@@ -10,7 +10,8 @@ export const toggleHappy = () => {
 export const fetchChatrooms = () => {
     return async (dispatch: any, getState: any) => {
         const token = getState().user.idToken;
-
+        console.log(token);
+        
         const response = await fetch(
             'https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app//chatrooms.json?auth=' + token, {
             method: 'GET',
@@ -19,7 +20,9 @@ export const fetchChatrooms = () => {
             }
         });
 
-        // console.log(await response.json());
+        //console.log(await response.json());
+        
+    
 
         if (!response.ok) {
             //There was a problem..
