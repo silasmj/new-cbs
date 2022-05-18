@@ -12,16 +12,19 @@ type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "Profile">
 export default function ProfileScreen() {
     const navigation = useNavigation<ScreenNavigationType>();
     const user: User = useSelector((state: RootState) => state.user.loggedInUser);
+    console.log('bub', user);
+    
     const [textEmail, setTextEmail] = useState(user.email)
-    const [textName, setTextName] = useState(user.displayname)
-    const [textStudyprogramme, setTextStudyprogramme] = useState(user.studyprogramme)
+    /*const [textName, setTextName] = useState(user.displayname)
+    const [textStudyprogramme, setTextStudyprogramme] = useState(user.studyprogramme)*/
+
 
     return (
         <View style={styles.container}>
             <Text>Profile Screen</Text>
             <Text>{textEmail}</Text>
-            <Text>{textName}</Text>
-            <Text>{textStudyprogramme}</Text>
+            <Text>{user.displayname}</Text>
+            <Text>{user.studyprogramme}</Text>
             <Button title="Edit profile" onPress={() => navigation.navigate("EditProfile")} />
         </View>
     );
