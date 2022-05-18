@@ -6,6 +6,8 @@ import { User } from '../entities/User';
 import { useSelector } from 'react-redux';
 import { RootState } from '../App';
 import React, { useState } from 'react';
+import colors from '../constants/colors';
+
 
 type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "Profile">;
 
@@ -20,21 +22,53 @@ export default function ProfileScreen() {
 
 
     return (
-        <View style={styles.container}>
-            <Text>Profile Screen</Text>
-            <Text>{textEmail}</Text>
-            <Text>{user.displayname}</Text>
-            <Text>{user.studyprogramme}</Text>
-            <Button title="Edit profile" onPress={() => navigation.navigate("EditProfile")} />
+        <View style={styles.screen}>
+                <Text style={styles.title}>Profile Screen</Text>
+                <View style={styles.textBox}>
+                    <Text>Email: {textEmail}</Text>
+                    <Text>Name: {user.displayname}</Text>
+                    <Text>Study Programme: {user.studyprogramme}</Text>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <View style={styles.button}>
+                        <Button title="Edit profile" onPress={() => navigation.navigate("EditProfile")} color={colors.accent}/>
+                    </View>
+                </View>
         </View>
+
+        
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    screen: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        padding: 10,
+        alignItems: 'center'
     },
-})
+    title: {
+        fontSize: 20,
+        marginVertical: 10,
+        color: 'green'
+    },
+    textBox: {
+        paddingVertical: 5,
+    },
+    inputContainer: {
+        width: 300,
+        maxWidth: '80%',
+        alignItems: 'center'
+    },
+    buttonContainer: {
+        paddingVertical: 10
+    },
+    button: {
+        backgroundColor: 'red',
+        elevation: 8,
+        borderRadius: 10,
+        paddingVertical: 2,
+        paddingHorizontal: 2
+    },
+
+
+});
