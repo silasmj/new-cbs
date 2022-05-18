@@ -30,7 +30,6 @@ export default function ReactQueryScreen() {
     }
 
     const renderChatroom = ({ item }: { item: any }) => (
-        
         <TouchableOpacity>
             <Text onPress={() => navigation.navigate("ChatRoomScreen")}>{item.title}</Text>
         </TouchableOpacity>
