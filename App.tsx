@@ -1,4 +1,5 @@
 import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import ReduxThunk from 'redux-thunk';
@@ -17,14 +18,17 @@ export type RootState = ReturnType<typeof rootReducer>
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 // const store = createStore(rootReducer);
 
-
+const queryClient = new QueryClient()
 
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <Navigation />
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+            <Navigation />
+        </Provider>
+     </QueryClientProvider>
+    
   )
 }
 

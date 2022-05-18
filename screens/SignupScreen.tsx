@@ -30,9 +30,11 @@ export default function SignupScreen() {
 
     return (
         <View style={styles.container}>
-            <Text>Signup Screen</Text>
-            <TextInput value={email} placeholder="email" onChangeText={setEmail} />
-            <TextInput value={password} placeholder="password" onChangeText={setPassword} />
+            <Text style={styles.header}>Signup Screen</Text>
+            <View>
+                <TextInput style={styles.input} value={email} placeholder="Enter Email" onChangeText={setEmail} />
+            </View>
+            <TextInput style={styles.inputPw} value={password} placeholder="Enter Password" onChangeText={setPassword} secureTextEntry={true} />
             <Button title="Signup" onPress={() => dispatch(signup(email, password))} />
         </View>
     );
@@ -41,8 +43,36 @@ export default function SignupScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#009387',
         alignItems: 'center',
         justifyContent: 'center',
     },
+    header: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 30
+    },
+    input: {
+        marginTop: 15,
+        backgroundColor: "white",
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: 'grey',
+        padding: 10,
+        fontSize: 20,
+        height: 50,
+        width: 250,
+    },
+    inputPw: {
+        marginTop: 15,
+        backgroundColor: "white",
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: 'grey',
+        padding: 10,
+        fontSize: 20,
+        marginBottom: 20,
+        height: 50,
+        width: 250,
+    }
 })
