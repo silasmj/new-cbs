@@ -31,7 +31,6 @@ export default function ReactQueryScreen() {
 
     const renderChatroom = ({ item }: { item: any }) => (
             <Text>{item.title}</Text>
-
     );
 
     return (
