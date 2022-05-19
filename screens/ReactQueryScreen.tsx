@@ -4,6 +4,7 @@ import { useFetchChatrooms } from '../hooks/rqhooks';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from "../typings/navigations";
+import { getItemAsync } from 'expo-secure-store';
 
 
 type ScreenNavigationType = NativeStackNavigationProp<
@@ -41,6 +42,7 @@ export default function ReactQueryScreen() {
             <FlatList
             data={chatrooms}
             renderItem={renderChatroom}
+            keyExtractor={(index) => index.toString()}
             />
             <Text>react query</Text>
         </View>
