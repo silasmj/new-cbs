@@ -22,7 +22,7 @@ export default function ReactQueryScreen() {
         return <Text>Loading...</Text>
         
     }
-    console.log('Hello', chatrooms);
+    //console.log('Hello', chatrooms);
     
 
     if(isError) {
@@ -35,8 +35,6 @@ export default function ReactQueryScreen() {
         </TouchableOpacity>
 
     );
-
-    
 
     return (
         <View style={styles.container}>
