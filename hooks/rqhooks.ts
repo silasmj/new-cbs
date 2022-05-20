@@ -1,4 +1,3 @@
-import { getStateFromPath } from '@react-navigation/native';
 import axios from 'axios';
 import { useQuery, useMutation } from 'react-query';
 import { useSelector } from 'react-redux';
@@ -31,8 +30,8 @@ export const useFetchChatrooms = () => {
 }
 
 export const usePostChatrooms = () => {
+    var { token } = helper()
     return useMutation((newChatroom: Chatroom) => {
-        var { token } = helper()
         return axios.post(baseURL + token, newChatroom)
     })
 }

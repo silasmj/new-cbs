@@ -4,7 +4,7 @@ import { useFetchChatrooms, usePostChatrooms } from '../hooks/rqhooks';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from "../typings/navigations";
-import { useMutation, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { Chatroom, Status } from '../entities/Chatroom';
 
 
@@ -51,7 +51,7 @@ export default function ReactQueryScreen() {
             <FlatList
             data={chatrooms}
             renderItem={renderChatroom}
-            keyExtractor={(index) => index.toString()}
+            keyExtractor={(item) => item.title}
             />
             <Text>react query</Text>
             <TextInput
