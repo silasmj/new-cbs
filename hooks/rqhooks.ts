@@ -1,6 +1,6 @@
 import { getStateFromPath } from '@react-navigation/native';
 import axios from 'axios';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import { useSelector } from 'react-redux';
 import { Chatroom } from '../entities/Chatroom';
 
@@ -10,7 +10,7 @@ function helper() {
     return {token};
 }
 
-const baseURL = "https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app/chatrooms.json?auth=";
+const baseURL = "https://cbs-project-df515-default-rtdb.europe-west1.firebasedatabase.app//chatrooms.json?auth=";
 
 export const useFetchChatrooms = () => {
     var { token } = helper()
@@ -28,5 +28,12 @@ export const useFetchChatrooms = () => {
     return{
         isLoading, isError, chatrooms, error
     }
+}
+
+export const usePostChatrooms = () => {
+    return useMutation((newChatroom: Chatroom) => {
+        var { token } = helper()
+        return axios.post(baseURL + token, newChatroom)
+    })
 }
 

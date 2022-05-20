@@ -1,10 +1,11 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { useFetchChatrooms } from '../hooks/rqhooks';
+import { FlatList, StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { useFetchChatrooms, usePostChatrooms } from '../hooks/rqhooks';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from "../typings/navigations";
-import { getItemAsync } from 'expo-secure-store';
+import { useMutation, useQueryClient } from 'react-query';
+import { Chatroom, Status } from '../entities/Chatroom';
 
 
 type ScreenNavigationType = NativeStackNavigationProp<
@@ -14,17 +15,22 @@ type ScreenNavigationType = NativeStackNavigationProp<
 
 
 export default function ReactQueryScreen() {
+    const [title, onChangeTitle] = React.useState('');
 
     const navigation = useNavigation<ScreenNavigationType>()
 
     const { isLoading, isError, chatrooms, error} = useFetchChatrooms();
 
+    const queryClient = useQueryClient();
+
+    // Mutations
+   const {mutate: createChatroom} = usePostChatrooms()
+
+
+
     if(isLoading) {
         return <Text>Loading...</Text>
-        
-    }
-    //console.log('Hello', chatrooms);
-    
+    }    
 
     if(isError) {
         return <Text>Error: {error}</Text>
@@ -34,6 +40,12 @@ export default function ReactQueryScreen() {
             <Text>{item.title}</Text>
     );
 
+    const rqHandleAddChatroom = () => {
+        const chatroom: Chatroom = new Chatroom(title, Status.UNREAD, '', new Date());
+        createChatroom(chatroom, {onSuccess: () => queryClient.invalidateQueries('chatrooms')})
+    } 
+    
+
     return (
         <View style={styles.container}>
             <FlatList
@@ -42,7 +54,15 @@ export default function ReactQueryScreen() {
             keyExtractor={(index) => index.toString()}
             />
             <Text>react query</Text>
+            <TextInput
+                onChangeText={onChangeTitle}
+                value={title}
+                placeholder="Chatroom name"
+            />
+            <Button onPress={rqHandleAddChatroom} title="Create chatroom"/>
+
         </View>
+        
     );
     
 }
