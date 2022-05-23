@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Chatroom, Status } from '../entities/Chatroom';
 import { addChatroom, fetchChatrooms, toggleHappy } from '../store/actions/chat.actions';
 import { StackParamList } from "../typings/navigations";
+import { useIsFocused } from "@react-navigation/native";
 import ChatRoom from "./ChatRoomScreen";
 
 
@@ -17,6 +18,7 @@ type ScreenNavigationType = NativeStackNavigationProp<
 export default function Screen1() {
     const navigation = useNavigation<ScreenNavigationType>()
     const [title, onChangeTitle] = React.useState('');
+    const ifFocused = useIsFocused();
 
     const isHappy = useSelector((state: any) => state.chat.isHappy) // subscribe to redux store and select attribute (isHappy)
     const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)
@@ -25,8 +27,11 @@ export default function Screen1() {
     const dispatch = useDispatch()
 
     useEffect(() => { // only runs dispatch the first time the component renders
-        dispatch(fetchChatrooms())
-    }, [])
+        if(ifFocused){
+            dispatch(fetchChatrooms())
+        }
+        
+    }, [ifFocused])
 
     const handleAddChatroom = () => {        
         const chatroom: Chatroom = new Chatroom(title, Status.UNREAD, '', new Date());
