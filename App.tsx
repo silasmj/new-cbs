@@ -25,9 +25,9 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-            <Navigation />
-        </Provider>
-     </QueryClientProvider>
+          <Navigation />
+      </Provider>
+    </QueryClientProvider>
     
   )
 }

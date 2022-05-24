@@ -14,7 +14,6 @@ type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "Profile">
 export default function ProfileScreen() {
     const navigation = useNavigation<ScreenNavigationType>();
     const user: User = useSelector((state: RootState) => state.user.loggedInUser);
-    console.log('bub', user);
     
     const [textEmail, setTextEmail] = useState(user.email)
     /*const [textName, setTextName] = useState(user.displayname)
@@ -25,7 +24,7 @@ export default function ProfileScreen() {
         <View style={styles.screen}>
                 <Text style={styles.title}>Profile Screen</Text>
                 <View style={styles.textBox}>
-                    <Text>Email: {textEmail}</Text>
+                    <Text>Email: {user.email}</Text>
                     <Text>Name: {user.displayname}</Text>
                     <Text>Study Programme: {user.studyprogramme}</Text>
                 </View>
