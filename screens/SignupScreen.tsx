@@ -17,8 +17,6 @@ export default function SignupScreen() {
             user = JSON.parse(userJson);
         }
         if (user) {
-            // then we have a priv. login
-            // restore the signup by updating the redux store based on usre and token.
             dispatch(rehydrateUser(user, token!))
         }
     }

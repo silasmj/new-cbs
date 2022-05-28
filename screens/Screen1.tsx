@@ -23,10 +23,9 @@ export default function Screen1() {
     const isHappy = useSelector((state: any) => state.chat.isHappy) // subscribe to redux store and select attribute (isHappy)
     const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)
 
-    // console.log("isHappy", isHappy);
     const dispatch = useDispatch()
 
-    useEffect(() => { // only runs dispatch the first time the component renders
+    useEffect(() => { 
         if(ifFocused){
             dispatch(fetchChatrooms())
         }
@@ -44,9 +43,6 @@ export default function Screen1() {
         </TouchableOpacity>
 
     );
-   /* const redirect = () => {
-        navigation.navigate('ChatRoom');
-    }*/
 
     return (
         <View style={styles.container}>

@@ -20,7 +20,6 @@ export default function EditProfileScreen() {
     const [textStudyprogramme, setTextStudyprogramme] = useState(user.studyprogramme)
     const dispatch = useDispatch();
     const navigation = useNavigation<ScreenNavigationType>()
-    //console.log('asdasdasdasdasd', user.displayname);
 
     const returnToProfile = () => {
         navigation.navigate("Profile")
@@ -30,9 +29,7 @@ export default function EditProfileScreen() {
         onSave(textEmail, textName, textStudyprogramme)
         returnToProfile()
     }
-    
-    // console.log(user.email);
-    
+        
     const onSave = (textEmail: string, textName: string, textStudyprogramme: string ) => {
         if (textEmail !== '' && textName !== '' && textStudyprogramme !== '' ) {
            dispatch(updateUser(textEmail, textStudyprogramme, textName));

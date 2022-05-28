@@ -14,9 +14,6 @@ type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "Profile">
 export default function ProfileScreen() {
     const navigation = useNavigation<ScreenNavigationType>();
     const user: User = useSelector((state: RootState) => state.user.loggedInUser);
-        /*const [textName, setTextName] = useState(user.displayname)
-    const [textStudyprogramme, setTextStudyprogramme] = useState(user.studyprogramme)*/
-
 
     return (
         <View style={styles.screen}>

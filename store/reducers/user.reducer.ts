@@ -18,8 +18,6 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
         case REHYDRATE_USER:
             return { ...state, loggedInUser: action.payload.user, idToken: action.payload.idToken }
         case SIGNUP:
-            // const user = new User(action.payload.email, '', '');
-            //state.loggedInUser = user; // MUTATION!!!!
             return { ...state, loggedInUser: action.payload.user, idToken: action.payload.idToken }
         case NEWUSER:
             return { ...state, loggedInUser: action.payload.newUser }

@@ -50,22 +50,12 @@ export const updateUser = (email: string, studyprogramme: string, name: string) 
             const updateUser = new User(email, name, studyprogramme, userId)
             dispatch({ type: UPDATEUSER, payload: { updateUser} })
 
-            /*const data: FirebaseSignupSuccess = await response.json(); // json to javascript
-            console.log("data from server", data);
-
-            const user = new User(data.email, '', '');
-
-            //await SecureStore.setItemAsync('idToken', data.idToken);
-            //await SecureStore.setItemAsync('user', JSON.stringify(user)); // convert user js-obj. to json
-
-            dispatch({ type: SIGNUP, payload: { user, idToken: data.idToken } })*/
         }
     };
     }
 
 export const signup = (email: string, password: string) => {
-    return async (dispatch: any, getState: any) => {
-        //const token = getState().user.token; // if you have a reducer named user(from combineReducers) with a token variable​
+    return async (dispatch: any, getState: any) => {​
 
         const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAD1NuDV3Ireh_x3erjp967_0MKU0VihB8', {
             method: 'POST',
@@ -73,8 +63,7 @@ export const signup = (email: string, password: string) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ //javascript to json
-                //key value pairs of data you want to send to server
-                // ...
+                
                 email: email,
                 password: password,
                 returnSecureToken: true,
@@ -82,8 +71,6 @@ export const signup = (email: string, password: string) => {
                 
             })
         });
-
-        // console.log(response.json());
 
         if (!response.ok) {
             //There was a problem..

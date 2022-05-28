@@ -11,12 +11,10 @@ import userReducer from './store/reducers/user.reducer';
 const rootReducer = combineReducers({
   chat: chatReducer,
   user: userReducer,
-  // posts: PostReducer
 });
 export type RootState = ReturnType<typeof rootReducer>
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
-// const store = createStore(rootReducer);
 
 const queryClient = new QueryClient()
 
